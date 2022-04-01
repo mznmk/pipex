@@ -6,11 +6,18 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 06:11:13 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/01 20:53:20 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/01 21:02:03 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/pipex.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <errno.h>
 
 static void
 exec_comand(int cmd_cnt, int cmd_num)
