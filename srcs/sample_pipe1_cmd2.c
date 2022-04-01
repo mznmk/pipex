@@ -6,19 +6,21 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 06:11:13 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/01 11:10:26 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:53:12 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/pipex.h"
 
-static void	child_process(char **argv, int *fd)
+static void
+child_process(char **argv, int *fd)
 {
 	int		fd_read;
 
 	// [ set "child-side" stream ]
 	// open file: upstrem-end
-	fd_read = open_fd(argv[1], "read");
+	fd_read = open(argv[1], O_RDONLY,
+							S_IRWXU | S_IRWXG | S_IRWXO);
 	// set stream: upstream-end
 	close(fd[0]);
 	close(STDIN_FILENO);
@@ -32,7 +34,8 @@ static void	child_process(char **argv, int *fd)
 	execlp("grep", "grep", "aa", NULL);
 }
 
-static void	parent_process(char **argv, int *fd)
+static void
+parent_process(char **argv, int *fd)
 {
 	int		fd_write;
 
@@ -41,7 +44,8 @@ static void	parent_process(char **argv, int *fd)
 	close(STDIN_FILENO);
 	dup2(fd[0], STDIN_FILENO);
 	// open file: downstream-end
-	fd_write = open_fd(argv[2], "write");
+	fd_write = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC,
+								S_IRWXU | S_IRWXG | S_IRWXO);
 	// set stream: downstream-end
 	close(fd[1]);
 	close(STDOUT_FILENO);
@@ -59,7 +63,8 @@ static void	parent_process(char **argv, int *fd)
 ** @param	envp	environment variables
 ** @return	status
 */
-int	main(int argc, char **argv, char **envp)
+int
+main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
 	pid_t	pid;

@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 06:11:13 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/01 11:10:09 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:53:16 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 ** @param	envp	environment variables
 ** @return	status
 */
-int	main(int argc, char **argv, char **envp)
+int
+main(int argc, char **argv, char **envp)
 {
 	int		fd_read;
 
@@ -31,7 +32,8 @@ int	main(int argc, char **argv, char **envp)
 
 	// [ set stream ]
 	// open file: upstream-end
-	fd_read = open_fd(argv[1], "read");
+	fd_read = open(argv[1], O_RDONLY,
+							S_IRWXU | S_IRWXG | S_IRWXO);
 	// set stream: upstream-end
 	close(STDIN_FILENO);
 	dup2(fd_read, STDIN_FILENO);

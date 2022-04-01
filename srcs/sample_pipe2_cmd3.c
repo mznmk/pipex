@@ -6,13 +6,14 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 06:11:13 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/01 11:10:36 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:53:20 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/pipex.h"
 
-static void	exec_comand(int cmd_cnt, int cmd_num)
+static void
+exec_comand(int cmd_cnt, int cmd_num)
 {
 	if (cmd_num == cmd_cnt - 1)
 		execlp("wc", "wc", "-w", NULL);
@@ -28,7 +29,8 @@ static void	exec_comand(int cmd_cnt, int cmd_num)
 		execlp("grep", "grep", "bb", NULL);
 }
 
-static void	child_process(int *fd, int cmd_cnt, int cmd_num)
+static void
+child_process(int *fd, int cmd_cnt, int cmd_num)
 {
 	// [ set "child-side" stream ]
 	// set stream: upstream-end
@@ -41,7 +43,8 @@ static void	child_process(int *fd, int cmd_cnt, int cmd_num)
 	exec_comand(cmd_cnt, cmd_num);
 }
 
-static void	parent_process(int *fd)
+static void
+parent_process(int *fd)
 {
 	// [ set "parent-side" stream ]
 	// set stream: upstream-end
@@ -51,26 +54,30 @@ static void	parent_process(int *fd)
 	close(fd[1]);
 }
 
-static void	set_read_stream(char **argv)
+static void
+set_read_stream(char **argv)
 {
 	int		fd_read;
 
 	// [ set stream ]
 	// open file
-	fd_read = open_fd(argv[1], "read");
+	fd_read = open(argv[1], O_RDONLY,
+							S_IRWXU | S_IRWXG | S_IRWXO);
 	// set stream: upstream-end
 	close(STDIN_FILENO);
 	dup2(fd_read, STDIN_FILENO);
 	close(fd_read);
 }
 
-static void	set_write_stream(char **argv, int cmd_cnt, int cmd_num)
+static void
+set_write_stream(char **argv, int cmd_cnt, int cmd_num)
 {
 	int		fd_write;
 
 	// [ set stream ]
 	// open file
-	fd_write = open_fd(argv[2], "write");
+	fd_write = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC,
+								S_IRWXU | S_IRWXG | S_IRWXO);
 	// set stream: downstream-end
 	close(STDOUT_FILENO);
 	dup2(fd_write, STDOUT_FILENO);
@@ -87,7 +94,8 @@ static void	set_write_stream(char **argv, int cmd_cnt, int cmd_num)
 ** @param	envp	environment variables
 ** @return	status
 */
-int	main(int argc, char **argv, char **envp)
+int
+main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
 	pid_t	pid;
