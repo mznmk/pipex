@@ -1,0 +1,10 @@
+# except directory
+
+# except object file
+*.o
+
+# except library file
+*.a
+
+# editor setting directory
+.vscode
