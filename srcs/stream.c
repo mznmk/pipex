@@ -6,48 +6,60 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:31:32 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 14:16:15 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 18:29:19 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/pipex.h"
 
-static int	open_read_fd(t_vars *v)
+static void	read_from_heredoc_helper(char *limiter)
 {
-	int	fd;
+	char	*readline;
+	size_t	len;
 
-	if (ft_strncmp(v->r_mode, "read", 4) == 0)
-		fd = open(v->argv[v->infile_index],
-				O_RDONLY,
-				S_IRWXU | S_IRWXG | S_IRWXO);
-	return (fd);
+	len = ft_strlen(limiter);
+	while (42)
+	{
+		readline = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(readline, limiter, len) == 0)
+		{
+			free(readline);
+			readline = NULL;
+			exit(EXIT_SUCCESS);
+		}
+		ft_putstr_fd(readline, STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		free(readline);
+		readline = NULL;
+	}
 }
 
-static int	open_write_fd(t_vars *v)
+void	read_from_heredoc(t_vars *v, int *fd)
 {
-	int	fd;
+	pid_t	pid;
 
-	if (ft_strncmp(v->w_mode, "write", 5) == 0)
-		fd = open(v->argv[v->outfile_index],
-				O_WRONLY | O_CREAT | O_TRUNC,
-				S_IRWXU | S_IRWXG | S_IRWXO);
-	else if (ft_strncmp(v->r_mode, "append", 6) == 0)
-		fd = open(v->argv[v->outfile_index],
-				O_WRONLY | O_CREAT | O_APPEND,
-				S_IRWXU | S_IRWXG | S_IRWXO);
-	return (fd);
-}
-
-void	close_fd(int fd)
-{
-	int	status;
-
-	status = close(fd);
-	if (status == -1)
+	if (pipe(fd) == -1)
+		exit_pipex(EXIT_FAILURE);
+	pid = fork();
+	if (0 == pid)
+	{
+		close_fd(fd[0]);
+		close_fd(STDOUT_FILENO);
+		dup2(fd[1], STDOUT_FILENO);
+		read_from_heredoc_helper(v->limiter);
+	}
+	else if (0 < pid)
+	{
+		waitpid(pid, NULL, 0);
+		close_fd(STDIN_FILENO);
+		dup2(fd[0], STDIN_FILENO);
+		close_fd(fd[1]);
+	}
+	else
 		exit_pipex(EXIT_FAILURE);
 }
 
-void	read_stream(t_vars *v)
+void	read_from_file(t_vars *v)
 {
 	int		fd_read;
 
@@ -59,7 +71,7 @@ void	read_stream(t_vars *v)
 	close_fd(fd_read);
 }
 
-void	write_stream(t_vars *v, int cmd_num)
+void	write_into_file(t_vars *v, int cmd_num)
 {
 	int		fd_write;
 

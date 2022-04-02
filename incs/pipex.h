@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 19:28:23 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 14:22:22 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 18:36:04 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 // ================================ library ================================= //
 
 # include "../libs/libft/includes/libft.h"
+# include "get_next_line.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -57,14 +58,20 @@ typedef struct s_vars
 	int			outfile_index;
 	char		*r_mode;
 	char		*w_mode;
+	char		*limiter;
 }				t_vars;
 
 // ========================= prototype declaration ========================== //
 
-// file_io.c
+// openclose.c
+int		open_read_fd(t_vars *v);
+int		open_write_fd(t_vars *v);
 void	close_fd(int fd);
-void	read_stream(t_vars *v);
-void	write_stream(t_vars *v, int cmd_num);
+
+// stream.c
+void	read_from_heredoc(t_vars *v, int *fd);
+void	read_from_file(t_vars *v);
+void	write_into_file(t_vars *v, int cmd_num);
 
 // execute.c
 void	exec_command(char **envp, char *command);

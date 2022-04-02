@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 06:26:48 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 14:07:39 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 18:34:19 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_pipex(t_vars *v, int argc, char **argv, char **envp)
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 	{
 		v->r_mode = "here_doc";
+		v->limiter = argv[2];
 		v->w_mode = "append";
 		v->cmd_count = argc - 4;
 		v->cmd_start = 3;

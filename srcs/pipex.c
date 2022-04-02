@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 11:52:05 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 14:15:24 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 18:35:08 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	exit_pipex(int exit_status)
 {
-	perror("ERROR");
+	perror(FNT_BOLD CLR_PINK "ERROR" ESC_RESET);
 	exit(exit_status);
 }
 
@@ -47,11 +47,15 @@ void	exec_pipex(t_vars *v)
 	pid_t	pid;
 	int		cmd_num;
 
-	read_stream(v);
+	if (ft_strncmp(v->r_mode, "read", 4) == 0)
+		read_from_file(v);
+	else if (ft_strncmp(v->r_mode, "here_doc", 8) == 0)
+		read_from_heredoc(v, fd);
 	cmd_num = 0;
 	while (cmd_num < v->cmd_count - 1)
 	{
-		pipe(fd);
+		if (pipe(fd) == -1)
+			exit_pipex(EXIT_FAILURE);
 		pid = fork();
 		if (0 == pid)
 			child_process(v, fd, cmd_num);
@@ -61,5 +65,5 @@ void	exec_pipex(t_vars *v)
 			exit_pipex(EXIT_FAILURE);
 		cmd_num++;
 	}
-	write_stream(v, cmd_num);
+	write_into_file(v, cmd_num);
 }
