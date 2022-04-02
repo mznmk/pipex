@@ -6,7 +6,7 @@
 #    By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 23:19:36 by mmizuno           #+#    #+#              #
-#    Updated: 2022/04/01 21:10:06 by mmizuno          ###   ########.fr        #
+#    Updated: 2022/04/02 13:46:48 by mmizuno          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,16 @@ PIPEX_INC_DIR		= ./incs/
 PIPEX_SRC_DIR		= ./srcs/
 
 MANDA_NAME			= pipex
-MANDA_SRC_NAME		= file_io.c \
+MANDA_SRC_NAME		= stream.c \
+					  execute.c \
 					  pipex.c \
 					  main_manda.c
 MANDA_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(MANDA_SRC_NAME))
 MANDA_OBJS			= $(MANDA_SRCS:.c=.o)					  
 
 BONUS_NAME			= pipex
-BONUS_SRC_NAME		= file_io.c \
+BONUS_SRC_NAME		= stream.c \
+					  execute.c \
 					  pipex.c \
 					  main_bonus.c
 BONUS_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(BONUS_SRC_NAME))
