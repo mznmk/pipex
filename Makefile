@@ -6,7 +6,7 @@
 #    By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 23:19:36 by mmizuno           #+#    #+#              #
-#    Updated: 2022/04/02 14:19:05 by mmizuno          ###   ########.fr        #
+#    Updated: 2022/04/02 17:36:54 by mmizuno          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,35 +18,41 @@ PIPEX_INC_DIR		= ./incs/
 PIPEX_SRC_DIR		= ./srcs/
 
 MANDA_NAME			= pipex
-MANDA_SRC_NAME		= stream.c \
+MANDA_SRC_NAME		= get_next_line_utils.c \
+					  get_next_line.c \
+					  file_io.c \
+					  stream.c \
 					  execute.c \
 					  pipex.c \
 					  main_manda.c
 MANDA_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(MANDA_SRC_NAME))
-MANDA_OBJS			= $(MANDA_SRCS:.c=.o)					  
+MANDA_OBJS			= $(MANDA_SRCS:.c=.o)
 
 BONUS_NAME			= pipex_bonus
-BONUS_SRC_NAME		= stream.c \
+BONUS_SRC_NAME		= get_next_line_utils.c \
+					  get_next_line.c \
+					  file_io.c \
+					  stream.c \
 					  execute.c \
 					  pipex.c \
 					  main_bonus.c
 BONUS_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(BONUS_SRC_NAME))
-BONUS_OBJS			= $(BONUS_SRCS:.c=.o)					  
+BONUS_OBJS			= $(BONUS_SRCS:.c=.o)
 
 P0_C1_NAME			= p0c1
 P0_C1_SRC_NAME		= sample_pipe0_cmd1.c
 P0_C1_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(P0_C1_SRC_NAME))
-P0_C1_OBJS			= $(P0_C1_SRCS:.c=.o)					  
+P0_C1_OBJS			= $(P0_C1_SRCS:.c=.o)
 
 P1_C2_NAME			= p1c2
 P1_C2_SRC_NAME		= sample_pipe1_cmd2.c
 P1_C2_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(P1_C2_SRC_NAME))
-P1_C2_OBJS			= $(P1_C2_SRCS:.c=.o)					  
+P1_C2_OBJS			= $(P1_C2_SRCS:.c=.o)
 
 P2_C3_NAME			= p2c3
 P2_C3_SRC_NAME		= sample_pipe2_cmd3.c
 P2_C3_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(P2_C3_SRC_NAME))
-P2_C3_OBJS			= $(P2_C3_SRCS:.c=.o)					  
+P2_C3_OBJS			= $(P2_C3_SRCS:.c=.o)
 
 LIBFT_NAME			= libft.a
 LIBFT_LIBNAME		= ft
@@ -145,7 +151,7 @@ re:					fclean all
 
 # --------------------------------- re_bonus --------------------------------- #
 
-re:					fclean bonus
+re_bonus:			fclean bonus
 
 # ---------------------------------- .PHONY ---------------------------------- #
 
