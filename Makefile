@@ -6,7 +6,7 @@
 #    By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 23:19:36 by mmizuno           #+#    #+#              #
-#    Updated: 2022/04/02 17:36:54 by mmizuno          ###   ########.fr        #
+#    Updated: 2022/04/02 18:42:44 by mmizuno          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PIPEX_SRC_DIR		= ./srcs/
 MANDA_NAME			= pipex
 MANDA_SRC_NAME		= get_next_line_utils.c \
 					  get_next_line.c \
-					  file_io.c \
+					  openclose.c \
 					  stream.c \
 					  execute.c \
 					  pipex.c \
@@ -31,7 +31,7 @@ MANDA_OBJS			= $(MANDA_SRCS:.c=.o)
 BONUS_NAME			= pipex_bonus
 BONUS_SRC_NAME		= get_next_line_utils.c \
 					  get_next_line.c \
-					  file_io.c \
+					  openclose.c \
 					  stream.c \
 					  execute.c \
 					  pipex.c \
