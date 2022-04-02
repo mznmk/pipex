@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 19:28:23 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 13:32:42 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 14:22:22 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define PIPEX_H
 
 // ================================= const ================================== //
-
-
 
 // --------------------------------- color ---------------------------------- //
 
@@ -48,27 +46,22 @@
 
 // ================================= struct ================================= //
 
-typedef struct	s_vars
+typedef struct s_vars
 {
 	int			argc;
 	char		**argv;
 	char		**envp;
 	int			cmd_count;
 	int			cmd_start;
-	// int			cmd_end;
-	// int			cmd_index;
 	int			infile_index;
 	int			outfile_index;
 	char		*r_mode;
 	char		*w_mode;
 }				t_vars;
 
-
 // ========================= prototype declaration ========================== //
 
 // file_io.c
-// int		open_read_fd(t_vars *v);
-// int		open_write_fd(t_vars *v);
 void	close_fd(int fd);
 void	read_stream(t_vars *v);
 void	write_stream(t_vars *v, int cmd_num);
@@ -79,6 +72,5 @@ void	exec_command(char **envp, char *command);
 // pipex.c
 int		exit_pipex(int exit_status);
 void	exec_pipex(t_vars *v);
-
 
 #endif

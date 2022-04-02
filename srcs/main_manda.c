@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 11:51:01 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 10:58:11 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 14:08:42 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 ** @brief	init pipex data struct
 ** @param	v		pipex data struct
 */
-static void
-init_pipex(t_vars *v, int argc, char **argv, char **envp)
+static void	init_pipex(t_vars *v, int argc, char **argv, char **envp)
 {
 	v->argc = argc;
 	v->argv = argv;
@@ -37,8 +36,7 @@ init_pipex(t_vars *v, int argc, char **argv, char **envp)
 ** @param	envp	environment variables
 ** @return	status
 */
-int
-main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_vars	v;
 
@@ -47,6 +45,5 @@ main(int argc, char **argv, char **envp)
 		init_pipex(&v, argc, argv, envp);
 		exec_pipex(&v);
 	}
-
 	return (0);
 }

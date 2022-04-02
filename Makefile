@@ -6,7 +6,7 @@
 #    By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 23:19:36 by mmizuno           #+#    #+#              #
-#    Updated: 2022/04/02 13:46:48 by mmizuno          ###   ########.fr        #
+#    Updated: 2022/04/02 14:19:05 by mmizuno          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MANDA_SRC_NAME		= stream.c \
 MANDA_SRCS			= $(addprefix $(PIPEX_SRC_DIR), $(MANDA_SRC_NAME))
 MANDA_OBJS			= $(MANDA_SRCS:.c=.o)					  
 
-BONUS_NAME			= pipex
+BONUS_NAME			= pipex_bonus
 BONUS_SRC_NAME		= stream.c \
 					  execute.c \
 					  pipex.c \
@@ -143,6 +143,10 @@ fclean:				clean
 
 re:					fclean all
 
+# --------------------------------- re_bonus --------------------------------- #
+
+re:					fclean bonus
+
 # ---------------------------------- .PHONY ---------------------------------- #
 
-.PHONY:				all bonus clean fclean re
+.PHONY:				all bonus clean fclean re re_bonus

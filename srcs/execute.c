@@ -6,25 +6,27 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:11:51 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 13:18:28 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/02 14:05:42 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/pipex.h"
 
-static void
-deallocate_memory(char **memory)
+static void	deallocate_memory(char **memory)
 {
 	int		i;
 
 	i = -1;
 	while (memory[++i])
+	{
 		free(memory[i]);
+		memory[i] = NULL;
+	}
 	free(memory);
+	memory = NULL;
 }
 
-char
-*join_pathname(char *path, char *name)
+static char	*join_pathname(char *path, char *name)
 {
 	char	*pathname;
 	size_t	len1;
@@ -49,8 +51,7 @@ char
 	return (pathname);
 }
 
-char
-*find_pathname(char **envp, char *command)
+static char	*find_pathname(char **envp, char *command)
 {
 	char	**paths;
 	char	*pathname;
@@ -77,8 +78,7 @@ char
 	return (NULL);
 }
 
-void
-exec_command(char **envp, char *command)
+void	exec_command(char **envp, char *command)
 {
 	char	*pathname;
 	char	**argv;
@@ -90,6 +90,5 @@ exec_command(char **envp, char *command)
 	if (!pathname)
 		exit_pipex(EXIT_FAILURE);
 	execve(pathname, argv, envp);
-	// execve("/usr/bin/wc", argv, envp);
 	deallocate_memory(argv);
 }
