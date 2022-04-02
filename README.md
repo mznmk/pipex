@@ -1,6 +1,10 @@
 # Pipex
 
+C言語で 42-pipex をつくってみた  
 [![](https://img.youtube.com/vi/xpVkqRyrKPY/0.jpg)](https://www.youtube.com/watch?v=xpVkqRyrKPY)  
+
+C言語で 42-pipex をつくってみた (here_doc実装編)  
+[![](https://img.youtube.com/vi/lIvp3lHBWrw/0.jpg)](https://www.youtube.com/watch?v=lIvp3lHBWrw)
 
 Summary:  
 This project will let you discover in detail a UNIX mechanism that you already know
