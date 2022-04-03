@@ -6,7 +6,7 @@
 /*   By: mmizuno <mmizuno@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 11:52:05 by mmizuno           #+#    #+#             */
-/*   Updated: 2022/04/02 18:35:08 by mmizuno          ###   ########.fr       */
+/*   Updated: 2022/04/03 22:29:51 by mmizuno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ static void	parent_process(int *fd, pid_t pid)
 }
 
 /*!
-** @brief	main (mandatory entry point)
-** @param	argc	argument count
-** @param	argv	argument variables
-** @param	envp	environment variables
+** @brief	pipex main routine
+** @param	v		pipex data struct
 ** @return	none
 */
 void	exec_pipex(t_vars *v)
